@@ -1,13 +1,14 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.12 // This was the only way I could get the ListView delegate to behave for me. Maybe you can help me understand the delegate component better.
+import QtGraphicalEffects 1.12 // Needed to start playing around with things like drop shadows
 
 
 Window {
     visible: true
     width: 360*2
     height: 640*2
-    title: qsTr("Hello World")
+    title: qsTr("Family List")
 
     Rectangle {
         id: abcRoot
@@ -25,11 +26,19 @@ Window {
             Text {
                 id: title
                 font.pixelSize: 40
-                text: "App Title"
+                text: "Family List"
                 color: "#FFFFFF"
 
                 anchors.centerIn: parent
             }
+        }
+
+        DropShadow {
+            anchors.fill: titleBar
+            source: titleBar
+            color: "#46000000"
+            verticalOffset: 4
+            radius: 8
         }
 
         Rectangle {
@@ -90,17 +99,31 @@ Window {
 
             delegate: ColumnLayout { // The docs for ColumnLayout say I should be able to set 'spacing' for specifying the space between column items, but perhaps that doesn't work with delegates?
                 Rectangle {
+
+                    // Doing some things with Layout in an attemt to get better control over list item positioning and formatting
                     Layout.topMargin: 12
                     Layout.leftMargin: 16
                     Layout.rightMargin: 16
                     Layout.preferredWidth: familyList.width - 32 // Honestly, I'm not entirely clear on how "preferredWidth" behaves
                     Layout.preferredHeight: 76
 
+                    // Basic formatting of the container elements for each list item
                     color: "#E6EDF5"
                     border.color: "#D7DEE5"
                     border.width: 1
                     radius: 8 // I was surprised to find that I can't specify independent corner radii (e.g. top-left: 8, top-right 20, etc.)
-
+/*
+                    // Let's try some drop shadows on these rectangles to give them some depth
+                    // UPDATE: This didn't work, and I'm not sure why. It appears to have something to with either: A) nesting the drop shadow declaration in the element it's shadowing, or B) using drop shadows in delegates where there isn't a unique id to reference for the drop shadow.
+                    DropShadow {
+                        width: parent.width
+                        height: parent.height
+                        source: parent
+                        color: "#26000000"
+                        verticalOffset: 6
+                        radius: 12
+                    }
+*/
                     Text { // I think there's a lot I can do with Text, but I didn't really get into it this evening
                         padding: 12
                         text: "Name: " + givenName + " " + familyName + "\n" + "Age: " + age
