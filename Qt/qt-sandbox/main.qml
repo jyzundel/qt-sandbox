@@ -6,8 +6,8 @@ import QtGraphicalEffects 1.12 // Needed to start playing around with things lik
 
 Window {
     visible: true
-    width: 360*2
-    height: 640*2
+    width: 360
+    height: 640
     title: qsTr("Family List")
 
     Rectangle {
@@ -20,12 +20,12 @@ Window {
             id: titleBar // This will be the title bar and utility nav
 
             width: parent.width
-            height: 88
+            height: 48
             color: "#00C06F"
 
             Text {
                 id: title
-                font.pixelSize: 40
+                font.pixelSize: 20
                 text: "Family List"
                 color: "#FFFFFF"
 
@@ -37,28 +37,28 @@ Window {
             anchors.fill: titleBar
             source: titleBar
             color: "#46000000"
-            verticalOffset: 4
-            radius: 8
+            verticalOffset: 2
+            radius: 4
         }
 
         Rectangle {
             id: fab // FAB or "Fast Action Button" for primary constructive action in the view
 
-            width: 100
-            height: 100
-            radius: 50
+            width: 48
+            height: 48
+            radius: 24
             color: "#00C06F"
 
             anchors {
                 right: parent.right
-                rightMargin: 40
+                rightMargin: 20
                 bottom: parent.bottom
-                bottomMargin: 40
+                bottomMargin: 20
             }
 
             Text {
                 color: "#FFFFFF"
-                font.pixelSize: 60
+                font.pixelSize: 36
                 text: "+"
                 anchors.centerIn: parent // I believe the position is a little off because of the line spacing, but I ran out of time to investigate tonight.
             }
@@ -91,43 +91,48 @@ Window {
             id: familyList // I definitely am at my limit with what I've done to this ListView
 
             anchors.top: titleBar.bottom
-            anchors.topMargin: 16
+            anchors.topMargin: 8
             width: parent.width
             height: parent.height - titleBar.height // Good to see that basic mathematical operators work for this kind of stuff
 
+            layoutDirection: verticalLayoutDirection
+            spacing: 4
+
             model: sampleModel
 
-            delegate: ColumnLayout { // The docs for ColumnLayout say I should be able to set 'spacing' for specifying the space between column items, but perhaps that doesn't work with delegates?
-                Rectangle {
-
-                    // Doing some things with Layout in an attemt to get better control over list item positioning and formatting
-                    Layout.topMargin: 12
-                    Layout.leftMargin: 16
-                    Layout.rightMargin: 16
-                    Layout.preferredWidth: familyList.width - 32 // Honestly, I'm not entirely clear on how "preferredWidth" behaves
-                    Layout.preferredHeight: 76
-
-                    // Basic formatting of the container elements for each list item
-                    color: "#E6EDF5"
-                    border.color: "#D7DEE5"
-                    border.width: 1
-                    radius: 8 // I was surprised to find that I can't specify independent corner radii (e.g. top-left: 8, top-right 20, etc.)
+            delegate: Rectangle {
 /*
-                    // Let's try some drop shadows on these rectangles to give them some depth
-                    // UPDATE: This didn't work, and I'm not sure why. It appears to have something to with either: A) nesting the drop shadow declaration in the element it's shadowing, or B) using drop shadows in delegates where there isn't a unique id to reference for the drop shadow.
-                    DropShadow {
-                        width: parent.width
-                        height: parent.height
-                        source: parent
-                        color: "#26000000"
-                        verticalOffset: 6
-                        radius: 12
-                    }
+                // Doing some things with Layout in an attemt to get better control over list item positioning and formatting
+                Layout.topMargin: 12
+                Layout.leftMargin: 16
+                Layout.rightMargin: 16
+                Layout.preferredWidth: familyList.width - 32 // Honestly, I'm not entirely clear on how "preferredWidth" behaves
+                Layout.preferredHeight: 76
 */
-                    Text { // I think there's a lot I can do with Text, but I didn't really get into it this evening
-                        padding: 12
-                        text: "Name: " + givenName + " " + familyName + "\n" + "Age: " + age
-                    }
+                width: parent.width - 16
+                height: childrenRect.height
+
+                // Basic formatting of the container elements for each list item
+                color: "#E6EDF5"
+                border.color: "#D7DEE5"
+                border.width: 1
+                radius: 4 // I was surprised to find that I can't specify independent corner radii (e.g. top-left: 8, top-right 20, etc.)
+/*
+                // Let's try some drop shadows on these rectangles to give them some depth
+                // UPDATE: This didn't work, and I'm not sure why. It appears to have something to with either: A) nesting the drop shadow declaration in the element it's shadowing, or B) using drop shadows in delegates where there isn't a unique id to reference for the drop shadow.
+                DropShadow {
+                    width: parent.width
+                    height: parent.height
+                    source: parent
+                    color: "#26000000"
+                    verticalOffset: 6
+                    radius: 12
+                }
+*/
+                Text { // I think there's a lot I can do with Text, but I didn't really get into it this evening
+                    padding: 6
+                    font.pixelSize: 14
+                    text: "Name: " + givenName + " " + familyName + "\n" + "Age: " + age
                 }
             }
         }
