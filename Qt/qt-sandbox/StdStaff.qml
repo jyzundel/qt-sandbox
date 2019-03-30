@@ -14,7 +14,7 @@ Item {
   QtObject {
     id: internal
     property int lineHeight: 1
-    property real ledgerLineWidth: noteWidth * 2 * 2
+    property real ledgerLineWidth: noteWidth * 2.5
   }
   // javascript function
   // signals
@@ -39,7 +39,7 @@ Item {
          height: internal.lineHeight
          width: internal.ledgerLineWidth
          color: "black"
-         anchors.horizontalCenter: parentHorizontalCenter
+         anchors.horizontalCenter: parent.HorizontalCenter
       }
 
        Rectangle {
@@ -49,7 +49,7 @@ Item {
          height: internal.lineHeight
          width: internal.ledgerLineWidth
          color: "black"
-         anchors.horizontalCenter: parentHorizontalCenter
+         anchors.horizontalCenter: parent.HorizontalCenter
        }
        Rectangle {
          id: aLedgerLine
@@ -57,7 +57,7 @@ Item {
          height: internal.lineHeight
          width: internal.ledgerLineWidth
          color: "black"
-         anchors.horizontalCenter: parentHorizontalCenter
+         anchors.horizontalCenter: parent.HorizontalCenter
        }
 
 
