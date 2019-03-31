@@ -15,9 +15,10 @@ Rectangle {
          id: chord1
          noteHeight: 12
      }
-
+/*
      StdStaff {
        id: chord2
      }
+     */
    }
 }
