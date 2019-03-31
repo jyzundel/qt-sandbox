@@ -51,7 +51,7 @@ Item {
          height: internal.lineHeight
          width: internal.ledgerLineWidth
          color: "black"
-         anchors.horizontalCenter: parent.HorizontalCenter
+         anchors.horizontalCenter: parent.horizontalCenter
        }
 
        Rectangle {
@@ -60,12 +60,14 @@ Item {
          height: internal.lineHeight
          width: internal.ledgerLineWidth
          color: "black"
-         anchors.horizontalCenter: parent.HorizontalCenter
+         anchors.horizontalCenter: parent.horizontalCenter
        }
 
        // Regular staff lines
        Item {
          id: fStaff
+         width: childrenRect.width
+         height: childrenRect.height
          anchors {
            left: parent.left
            right: parent.right
@@ -74,7 +76,6 @@ Item {
          Text {
            id: fLabel
            text: qsTr("F")
-           width: 10
            anchors.left: parent.left
          }
 
@@ -83,8 +84,10 @@ Item {
            height: internal.lineHeight
            color: "black"
            anchors {
-             left: parent.left
+             left: fLabel.right
              right: parent.right
+             verticalCenter: fLabel.verticalCenter
+             leftMargin: 8
            }
          }
        }
