@@ -5,9 +5,13 @@ Item {
   width: childrenRect.width
   height: childrenRect.height
 
+  property real lineHeight: 1
+  property int labelHeight: 10
+
   Text {
-    id: label
-    text: qsTr(" ")
+    id: lineLabelText
+    property alias lineLabel: lineLabelText.text
+    font.pixelSize: labelHeight
     anchors.left: parent.left
   }
 
@@ -22,5 +26,4 @@ Item {
       leftMargin: 8
     }
   }
-
 }
