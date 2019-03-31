@@ -41,7 +41,7 @@ Item {
          height: internal.lineHeight
          width: internal.ledgerLineWidth
          color: "black"
-         anchors.horizontalCenter: parent.HorizontalCenter
+         anchors.horizontalCenter: parent.horizontalCenter
       }
 
        Rectangle {
