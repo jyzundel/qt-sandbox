@@ -5,12 +5,46 @@ Rectangle {
    id: test
    width: 200
    height: 100
+   color: "cyan"
 
    Rectangle {
-     color: "transparent"
+     color: "white"
      anchors {
        fill: parent
        margins: 10
+     }
+
+     Repeater {
+       id: spaceLabels
+       anchors {
+         top: parent.top
+         topMargin: StyleManager.lineNoteHeight
+         left: parent.left
+       }
+
+       model: ["G", "E", "C", "A", "F", "D"]
+       delegate: Rectangle {
+         id: spaceRect
+         height: StyleManager.lineNoteHeight
+         width: spaceLabel.width
+         anchors {
+           top: parent.top
+           topMargin: height * index
+           left: parent.left
+         }
+
+         Text {
+           id: spaceLabel
+           font.pixelSize: StyleManager.noteHeight * 0.8
+           text: modelData
+           color: "black"
+           anchors {
+             verticalCenter: parent.verticalCenter
+             left: parent.left
+             leftMargin: spaceLabel.font.pixelSize * 0.3
+           }
+         }
+       }
      }
 
      StdLine {
@@ -19,7 +53,7 @@ Rectangle {
        label: "F"
        anchors {
          top: parent.top
-         topMargin: StyleManager.noteHeight
+         topMargin: StyleManager.lineNoteHeight * 0.5
          left: parent.left
        }
      }

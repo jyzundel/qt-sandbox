@@ -5,7 +5,7 @@ Item {
   id: stdLine
   //width: childrenRect.width
   //height: childrenRect.height
-  height: StyleManager.noteHeight + StyleManager.lineHeight
+  height: StyleManager.lineNoteHeight
 
 
   property alias label: lineLabel.text
