@@ -28,7 +28,7 @@ Rectangle {
 
          property real offsetX: index & 0x1 ? width : 0.0
          height: StyleManager.noteHeight
-         width: height // note.width
+         width: height // note.width xxx
          radius: height * 0.5
          color: index & 0x1 ? "red" : "black"
          anchors {
@@ -37,21 +37,8 @@ Rectangle {
            left: notes.left
            leftMargin: offsetX
          }
-/*
-         Text {
-           id: note
-           font.pixelSize: StyleManager.noteHeight
-           text: "\u1D158"
-           color: "black"
-           anchors {
-             verticalCenter: parent.verticalCenter
-             left: parent.left
-           }
-         }
-         */
        }
      }
-
 
      Repeater {
        id: spaceLabels
