@@ -26,16 +26,16 @@ Rectangle {
        delegate: Rectangle {
          id: noteRect
 
-         property var offset: index & 0x1 ? [0.0, 0.0] : [width, StyleManager.lineNoteHeight * 0.5]
+         property real offsetX: index & 0x1 ? width : 0.0
          height: StyleManager.noteHeight
          width: height // note.width
          radius: height * 0.5
          color: index & 0x1 ? "red" : "black"
          anchors {
            top: notes.top
-           topMargin: StyleManager.lineNoteHeight * index * 0.5 // + offset[1]
+           topMargin: StyleManager.lineNoteHeight * index * 0.5
            left: notes.left
-           //leftMargin: offset[0]
+           leftMargin: offsetX
          }
 /*
          Text {
