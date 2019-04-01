@@ -22,17 +22,20 @@ Rectangle {
          left: parent.left
          leftMargin: 50
        }
-       model: 6
+       model: 11
        delegate: Rectangle {
          id: noteRect
+
+         property var offset: index & 0x1 ? [0.0, 0.0] : [width, StyleManager.lineNoteHeight * 0.5]
          height: StyleManager.noteHeight
          width: height // note.width
          radius: height * 0.5
-         color: "black"
+         color: index & 0x1 ? "red" : "black"
          anchors {
            top: notes.top
-           topMargin: StyleManager.lineNoteHeight * index
+           topMargin: StyleManager.lineNoteHeight * index * 0.5 // + offset[1]
            left: notes.left
+           //leftMargin: offset[0]
          }
 /*
          Text {
