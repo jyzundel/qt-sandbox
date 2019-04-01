@@ -15,6 +15,42 @@ Rectangle {
      }
 
      Repeater {
+       id: notes
+       anchors {
+         top: parent.top
+         topMargin: StyleManager.lineHeight
+         left: parent.left
+         leftMargin: 50
+       }
+       model: 6
+       delegate: Rectangle {
+         id: noteRect
+         height: StyleManager.noteHeight
+         width: height // note.width
+         radius: height * 0.5
+         color: "black"
+         anchors {
+           top: notes.top
+           topMargin: StyleManager.lineNoteHeight * index
+           left: notes.left
+         }
+/*
+         Text {
+           id: note
+           font.pixelSize: StyleManager.noteHeight
+           text: "\u1D158"
+           color: "black"
+           anchors {
+             verticalCenter: parent.verticalCenter
+             left: parent.left
+           }
+         }
+         */
+       }
+     }
+
+
+     Repeater {
        id: spaceLabels
        anchors {
          top: parent.top
