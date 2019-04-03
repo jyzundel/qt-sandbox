@@ -19,6 +19,21 @@ Rectangle {
      property var notes: [openNote, fillNote, flat, natural, sharp]
    }
 
+   IconSvg {
+     id: anSvg
+
+     width: 12
+     height: 10
+     name: "note"
+
+     anchors {
+       left: parent.left
+       top: parent.top
+       leftMargin: 5
+       topMargin: 5
+     }
+   }
+
    Rectangle {
      color: "white"
      anchors {
@@ -60,7 +75,7 @@ Rectangle {
          left: parent.left
        }
 
-       model: internal.notes //["G", "E", "C", "A", "F", "D"]
+       model: ["G", "E", "C", "A", "F", "D"]
        delegate: Rectangle {
          id: spaceRect
          height: StyleManager.lineNoteHeight
