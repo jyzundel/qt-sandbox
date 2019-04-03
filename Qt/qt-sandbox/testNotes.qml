@@ -18,7 +18,7 @@ Rectangle {
 
      property var notes: [openNote, fillNote, flat, natural, sharp]
    }
-
+/*
    IconSvg {
      id: anSvg
 
@@ -33,7 +33,7 @@ Rectangle {
        topMargin: 5
      }
    }
-
+*/
    Rectangle {
      color: "white"
      anchors {
@@ -50,7 +50,25 @@ Rectangle {
          leftMargin: 50
        }
        model: 11
-       delegate: Rectangle {
+       delegate: IconSvg {
+         id: noteSvg
+
+         property real offsetX: index & 0x1 ? width : 0.0
+         width: height * 1.2
+         height: StyleManager.noteHeight
+         name: "note"
+         //color: index & 0x1 ? "red" : "black"
+         anchors {
+           top: notes.top
+           topMargin: StyleManager.lineNoteHeight * index * 0.5
+           left: notes.left
+           leftMargin: offsetX
+         }
+       }
+     }
+
+/*
+       Rectangle {
          id: noteRect
 
          property real offsetX: index & 0x1 ? width : 0.0
@@ -66,7 +84,7 @@ Rectangle {
          }
        }
      }
-
+*/
      Repeater {
        id: spaceLabels
        anchors {
@@ -85,7 +103,7 @@ Rectangle {
            topMargin: height * index
            left: parent.left
          }
-
+/*
          IconSvg {
            id: aNoteIcon
 
@@ -99,6 +117,7 @@ Rectangle {
              leftMargin: 25
            }
          }
+*/
          Text {
            id: spaceLabel
            font.pixelSize: StyleManager.noteHeight
@@ -115,7 +134,7 @@ Rectangle {
 
      StdLine {
        id: fLine
-       lineWidth: 100
+       lineWidth: 200
        label: "F"
        anchors {
          top: parent.top
@@ -126,7 +145,7 @@ Rectangle {
 
      StdLine {
        id: dLine
-       lineWidth: 100
+       lineWidth: 200
        label: "D"
        anchors {
          top: fLine.bottom
@@ -136,7 +155,7 @@ Rectangle {
 
      StdLine {
        id: bLine
-       lineWidth: 100
+       lineWidth: 200
        label: "B"
        anchors {
          top: dLine.bottom
@@ -146,7 +165,7 @@ Rectangle {
 
      StdLine {
        id: gLine
-       lineWidth: 100
+       lineWidth: 200
        label: "G"
        anchors {
          top: bLine.bottom
@@ -156,7 +175,7 @@ Rectangle {
 
      StdLine {
        id: eLine
-       lineWidth: 100
+       lineWidth: 200
        label: "E"
        anchors {
          top: gLine.bottom
