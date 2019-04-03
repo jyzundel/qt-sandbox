@@ -66,25 +66,27 @@ Rectangle {
 }
 */
 Rectangle {
-  width: 50
-  height: 50
+  width: 200
+  height: 200
 
-  property real w_2: 12 * 0.5
-  property real h_2: 10 * 0.5
+  property real w: 120
+  property real h: 100
+  property real w_2: w * 0.5
+  property real h_2: h * 0.5
 
-  property string moveTo: "M" + w_2 + ",0"
-  property string q1: " q" + w_2 + ",0 0," + h_2
-  property string q2: " q0," + h_2 + " " + -w_2 + ",0"
-  property string q3: " q" + -w_2 + ",0 0," + -h_2
-  property string q4: " q0," + -h_2 + " " + w_2 + ",0"
+  property string moveTo: "M " + w_2 + ",0"
+  property string q1: " Q " + w + ",0 " + w + "," + h_2
+  property string q2: " Q " + w + "," + h + " " + w_2 + "," + h
+  property string q3: " Q 0," + h + " 0," + h_2
+  property string q4: " Q 0,0 " + w_2 + ",0"
   property string end: " Z"
 
   Shape {
-    width: 50
-    height: 50
+    width: w
+    height: h
     anchors {
-      bottom: parent.bottom
-      right: parent.right
+      top: parent.top
+      left: parent.left
     }
 
     scale: 1.0
@@ -92,14 +94,14 @@ Rectangle {
 
     ShapePath {
       strokeColor: "black"
-      strokeWidth: 2
-      fillColor: "transparent"
+      strokeWidth: 1
+      fillColor: "red"
       capStyle: ShapePath.RoundCap
 
-      property real width: 12
-      property real height: 10
+      //property real width: 12
+      //property real height: 10
 
-      property int joinStyleIndex: 0
+      property int joinStyleIndex: 2
       property variant styles: [
         ShapePath.BevelJoin,
         ShapePath.MiterJoin,

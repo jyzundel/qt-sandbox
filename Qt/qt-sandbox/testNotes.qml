@@ -7,6 +7,18 @@ Rectangle {
    height: 100
    color: "cyan"
 
+   QtObject {
+     id: internal
+
+     property string openNote: "\u1d15d"
+     property string fillNote: "\u1d15f"
+     property string flat: "\u266d"
+     property string natural: "\u266e"
+     property string sharp: "\u266f"
+
+     property var notes: [openNote, fillNote, flat, natural, sharp]
+   }
+
    Rectangle {
      color: "white"
      anchors {
@@ -48,7 +60,7 @@ Rectangle {
          left: parent.left
        }
 
-       model: ["G", "E", "C", "A", "F", "D"]
+       model: internal.notes //["G", "E", "C", "A", "F", "D"]
        delegate: Rectangle {
          id: spaceRect
          height: StyleManager.lineNoteHeight
@@ -61,7 +73,7 @@ Rectangle {
 
          Text {
            id: spaceLabel
-           font.pixelSize: StyleManager.noteHeight * 0.8
+           font.pixelSize: StyleManager.noteHeight * 2
            text: modelData
            color: "black"
            anchors {
