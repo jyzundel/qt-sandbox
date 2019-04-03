@@ -6,7 +6,7 @@ Item {
   property string name: undefined
 
   Image {
-    source: "icons/" + name + ".svg"
+    source: "Images/" + name + ".svg"
     fillMode: Image.Stretch  // Image.PreserveAspectFit
     smooth: true
 

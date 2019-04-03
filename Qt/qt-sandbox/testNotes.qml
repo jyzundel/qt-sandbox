@@ -86,9 +86,13 @@ Rectangle {
            left: parent.left
          }
 
+         //IconSvg {
+         //
+         //}
+
          Text {
            id: spaceLabel
-           font.pixelSize: StyleManager.noteHeight * 2
+           font.pixelSize: StyleManager.noteHeight
            text: modelData
            color: "black"
            anchors {
