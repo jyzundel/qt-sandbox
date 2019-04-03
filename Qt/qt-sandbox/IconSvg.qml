@@ -8,7 +8,7 @@ Item {
   Image {
     source: "Images/" + name + ".svg"
     fillMode: Image.Stretch  // Image.PreserveAspectFit
-    smooth: true
+    smooth: false
 
     anchors.fill: parent
   }

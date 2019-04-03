@@ -3,8 +3,8 @@ import "Styles"
 
 Rectangle {
    id: test
-   width: 200
-   height: 100
+   width: 600
+   height: 300
    color: "cyan"
 
    QtObject {
@@ -86,10 +86,19 @@ Rectangle {
            left: parent.left
          }
 
-         //IconSvg {
-         //
-         //}
+         IconSvg {
+           id: aNoteIcon
 
+           width: height * 1.2
+           height: StyleManager.noteHeight
+           name: "note"
+
+           anchors {
+             verticalCenter: parent.verticalCenter
+             top: parent.top
+             leftMargin: 25
+           }
+         }
          Text {
            id: spaceLabel
            font.pixelSize: StyleManager.noteHeight
