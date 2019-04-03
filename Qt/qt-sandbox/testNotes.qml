@@ -18,22 +18,7 @@ Rectangle {
 
      property var notes: [openNote, fillNote, flat, natural, sharp]
    }
-/*
-   IconSvg {
-     id: anSvg
 
-     width: 12
-     height: 10
-     name: "note"
-
-     anchors {
-       left: parent.left
-       top: parent.top
-       leftMargin: 5
-       topMargin: 5
-     }
-   }
-*/
    Rectangle {
      color: "white"
      anchors {
@@ -55,26 +40,8 @@ Rectangle {
 
          property real offsetX: index & 0x1 ? width : 0.0
          width: height * 1.2
-         height: StyleManager.noteHeight
+         height: StyleManager.lineNoteHeight
          name: "note"
-         //color: index & 0x1 ? "red" : "black"
-         anchors {
-           top: notes.top
-           topMargin: StyleManager.lineNoteHeight * index * 0.5
-           left: notes.left
-           leftMargin: offsetX
-         }
-       }
-     }
-
-/*
-       Rectangle {
-         id: noteRect
-
-         property real offsetX: index & 0x1 ? width : 0.0
-         height: StyleManager.noteHeight
-         width: height // note.width xxx
-         radius: height * 0.5
          color: index & 0x1 ? "red" : "black"
          anchors {
            top: notes.top
@@ -84,7 +51,7 @@ Rectangle {
          }
        }
      }
-*/
+
      Repeater {
        id: spaceLabels
        anchors {
@@ -134,7 +101,7 @@ Rectangle {
 
      StdLine {
        id: fLine
-       lineWidth: 200
+       lineWidth: 300
        label: "F"
        anchors {
          top: parent.top
@@ -145,7 +112,7 @@ Rectangle {
 
      StdLine {
        id: dLine
-       lineWidth: 200
+       lineWidth: 300
        label: "D"
        anchors {
          top: fLine.bottom
@@ -155,7 +122,7 @@ Rectangle {
 
      StdLine {
        id: bLine
-       lineWidth: 200
+       lineWidth: 300
        label: "B"
        anchors {
          top: dLine.bottom
@@ -165,7 +132,7 @@ Rectangle {
 
      StdLine {
        id: gLine
-       lineWidth: 200
+       lineWidth: 300
        label: "G"
        anchors {
          top: bLine.bottom
@@ -175,7 +142,7 @@ Rectangle {
 
      StdLine {
        id: eLine
-       lineWidth: 200
+       lineWidth: 300
        label: "E"
        anchors {
          top: gLine.bottom
