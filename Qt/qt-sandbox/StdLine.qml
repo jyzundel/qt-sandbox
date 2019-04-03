@@ -8,7 +8,7 @@ Item {
   height: StyleManager.lineNoteHeight
 
 
-  property alias label: lineLabel.text
+  //property alias label: lineLabel.text
   property alias lineWidth: line.width
 
   Rectangle {
@@ -20,7 +20,7 @@ Item {
       verticalCenter: parent.verticalCenter
     }
   }
-
+/*
   Text {
     id: lineLabel
     font.pixelSize: StyleManager.noteHeight * 0.8
@@ -31,6 +31,7 @@ Item {
       leftMargin: lineLabel.font.pixelSize * 0.3
     }
   }
+  */
 
 
 }
