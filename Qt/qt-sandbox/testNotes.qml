@@ -4,7 +4,7 @@ import "Styles"
 Rectangle {
   id: test
   width: 600
-  height: 300
+  height: StyleManager.lineNoteHeight * 12
   color: "cyan"
 
   QtObject {
@@ -20,94 +20,99 @@ Rectangle {
   }
 
   Rectangle {
-     color: "white"
-     anchors {
-       fill: parent
-       margins: 10
-     }
+    color: "white"
+    anchors {
+      fill: parent
+      margins: 10
+    }
 
-     Repeater {
-       id: notes
-       anchors {
-         top: parent.top
-         topMargin: StyleManager.lineHeight
-         left: parent.left
-         leftMargin: 100
-       }
-       model: 11
-       delegate: IconSvg {
-         id: noteSvg
+    // Notes
+    /*Repeater {
+      id: notes 
 
-         property real offsetX: index & 0x1 ? width : 0.0
-         width: height * 1.2
-         height: StyleManager.noteHeight
-         name: "note"
-         color: index & 0x1 ? "red" : "black"
-         anchors {
-           top: notes.top
-           topMargin: StyleManager.lineNoteHeight * index * 0.5
-           left: notes.left
-           leftMargin: offsetX
-         }
-       }
-     }
+      anchors {
+        top: parent.top
+        topMargin: StyleManager.lineHeight
+        left: parent.left
+        leftMargin: 100
+      }
+      model: 11
+      delegate: IconSvg {
+        id: noteSvg
 
-     Repeater {
-       id: spaceLabels
-       width: 340
-       anchors {
-         top: parent.top
-         topMargin: StyleManager.lineNoteHeight
-         left: parent.left
-       }
+        property real offsetX: index & 0x1 ? width : 0.0
+        width: height * 1.2
+        height: StyleManager.noteHeight
+        name: "note"
+        color: index & 0x1 ? "red" : "black"
+        anchors {
+          top: notes.top
+          topMargin: StyleManager.lineNoteHeight * index * 0.5
+          left: notes.left
+          leftMargin: offsetX
+        }
+      }
+    }*/
 
-       model: ["G", "F", "E", "D", "C", "B", "A", "G", "F", "E", "D"]
-       delegate: Rectangle {
-         id: spaceRect
+    // Labels
+    Repeater {
+      id: spaceLabels
+      width: 340
+      anchors {
+        top: parent.top
+        topMargin: StyleManager.lineNoteHeight * 4
+        left: parent.left
+      }
 
-         property real offsetX: index & 0x1 ? 0.0 : width
-         height: StyleManager.lineNoteHeight
-         width: height
-         color: "#C0ffffff"
-         anchors {
-           top: parent.top
-           topMargin: height * index * 0.5
-           right: spaceLabels.right
-           rightMargin: spaceRect.offsetX
-         }
+      model: ["G", "F", "E", "D", "C", "B", "A", "G", "F", "E", "D"]
+      delegate: Rectangle {
+        id: spaceRect
 
-         Text {
-           id: spaceLabel
-           font.pixelSize: StyleManager.noteHeight * 0.8
-           text: modelData
-           color: "black"
-           anchors {
-             verticalCenter: parent.verticalCenter
-             left: parent.left
-             leftMargin: spaceLabel.font.pixelSize * 0.3
-           }
-         }
-       }
-     }
+        property real offsetX: index & 0x1 ? 0.0 : width
+        height: StyleManager.lineNoteHeight
+        width: height
+        color: "#C0ffffff"
+        anchors {
+          top: parent.top
+          topMargin: height * index * 0.5
+          right: spaceLabels.right
+          rightMargin: spaceRect.offsetX
+        }
 
-     Repeater {
-       id: lines
-       width: 300
-       model: 5
-       anchors {
-         top: parent.top
-         topMargin: StyleManager.lineNoteHeight * 0.5
-         left: parent.left
-       }
+        Text {
+          id: spaceLabel
+          font.pixelSize: StyleManager.noteHeight * 0.8
+          text: modelData
+          color: "black"
+          anchors {
+            verticalCenter: parent.verticalCenter
+            left: parent.left
+            leftMargin: spaceLabel.font.pixelSize * 0.3
+          }
+        }
+      }
+    }
 
-       delegate: StdLine {
-         lineWidth: 300
-         anchors {
-           top: lines.top
-           topMargin: StyleManager.lineNoteHeight * index
-           left: lines.left
-         }
-       }
-     }
+     
+    Repeater {
+      id: lines
+      width: 300
+      model: 5
+      anchors {
+        top: parent.top
+        topMargin: StyleManager.lineNoteHeight * 4
+        left: parent.left
+      }
+
+
+      delegate: StdLine {
+        lineWidth: 300
+        anchors {
+          top: lines.top
+          topMargin: StyleManager.lineNoteHeight * index
+          left: lines.left
+        }
+      }
+    }
   }
 }
