@@ -26,7 +26,7 @@ Rectangle {
       margins: 10
     }
 
-    // Notes
+    // Notes added a comment
     /*Repeater {
       id: notes 
 
