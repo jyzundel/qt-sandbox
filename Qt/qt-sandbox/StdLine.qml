@@ -16,7 +16,7 @@ Item {
     height: StyleManager.lineHeight
     color: "black"
     anchors {
-      left: parent.left
+      //left: parent.left
       verticalCenter: parent.verticalCenter
     }
   }
