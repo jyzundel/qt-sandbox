@@ -20,18 +20,4 @@ Item {
       verticalCenter: parent.verticalCenter
     }
   }
-/*
-  Text {
-    id: lineLabel
-    font.pixelSize: StyleManager.noteHeight * 0.8
-    color: "black"
-    anchors {
-      verticalCenter: parent.verticalCenter
-      left: line.right
-      leftMargin: lineLabel.font.pixelSize * 0.3
-    }
-  }
-  */
-
-
 }

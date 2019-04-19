@@ -3,8 +3,8 @@ import "Styles"
 
 Rectangle {
   id: test
+  height: canvas.height + 20
   width: 600
-  height: StyleManager.lineNoteHeight * 12.5 + 20
   color: "cyan"
 
   QtObject {
@@ -20,70 +20,35 @@ Rectangle {
   }
 
   Rectangle {
+    id: canvas
     color: "white"
+    height: StyleManager.lineNoteHeight * 12 + StyleManager.noteHeight * 0.5
     anchors {
-      fill: parent
+      top: parent.top
+      left: parent.left
+      right: parent.right
       margins: 10
     }
 
-    // Notes added a comment
-    Repeater {
-      id: notes 
-
+    StdStaff {
+      id: staffLines
       anchors {
-        //top: parent.top
-        //topMargin: StyleManager.lineHeight
+        top: parent.top
+        topMargin: StyleManager.lineNoteHeight * 4
+        left: parent.left
+        right: parent.right
+      }
+    }
+
+    // Notes added a comment
+    Beat {
+      id: chord
+      anchors{
+        top: parent.top
+        bottom: parent.bottom
         left: parent.left
         leftMargin: 100
-      } 
-      model: 24
-      delegate: Rectangle {
-        property real offsetX: index & 0x1 ? width : 0.0
-        width: height * 1.2
-        height: StyleManager.noteHeight
-        color: "#80008000"
-        anchors {
-          top: notes.top
-          topMargin: StyleManager.lineNoteHeight * index * 0.5
-          left: notes.left
-          leftMargin: offsetX
-        } 
-        
-        IconSvg {
-          id: noteSvg
-          name: "note"
-          color: index & 0x1 ? "red" : "black"
-          width: height * 1.2
-          height: parent.height
-          anchors.centerIn: parent
-        }
-
-        StdLine {
-          id: ledgerLine
-          visible: index & 0x1
-          lineWidth: parent.width * 1.4  
-          anchors {
-            horizontalCenter: parent.horizontalCenter
-            horizontalCenterOffset: -lineWidth * 0.5
-            //verticalCenter: parent.verticalCenter
-          }
-        }
       }
-/*    delegate: IconSvg {
-        id: noteSvg
-
-        property real offsetX: index & 0x1 ? width : 0.0
-        width: height * 1.2
-        height: StyleManager.noteHeight
-        name: "note"
-        color: index & 0x1 ? "red" : "black"
-        anchors {
-          top: notes.top
-          topMargin: StyleManager.lineNoteHeight * index * 0.5
-          left: notes.left
-          leftMargin: offsetX
-        }
-      }*/
     }
 
     // Labels
@@ -95,11 +60,11 @@ Rectangle {
         //topMargin: StyleManager.lineNoteHeight * 0.5
         left: parent.left
       }
-
+/*
       Component.onCompleted: {
         console.log("spaceLabels y: " + y + 
         " lineNoteHeight: "  + StyleManager.lineNoteHeight)
-      }
+      }*/
 
       model: ["F", "E", "D", "C", "B", "A", "G", "F", "E", "D", "C", "B", "A", "G", "F", "E", "D", "C", "B", "A", "G", "F", "E", "D"]
       delegate: Rectangle {
@@ -115,10 +80,10 @@ Rectangle {
           right: spaceLabels.right
           rightMargin: spaceRect.offsetX
         }
-
+/*
         Component.onCompleted: {
           console.log("delegate: " + index + " y: " + y)
-        }
+        }*/
 
         Text {
           id: spaceLabel
@@ -130,32 +95,13 @@ Rectangle {
             left: parent.left
             leftMargin: spaceLabel.font.pixelSize * 0.3
           }
-
+/*
           Component.onCompleted: {
             console.log("Delegate Text: " + text + " y: " + y)
-          }
+          }*/
         }
       }
     }
 
-    Repeater {
-      id: lines
-      width: 300
-      model: 5
-      anchors {
-        top: parent.top
-        topMargin: StyleManager.lineNoteHeight * 3.5
-        left: parent.left
-      }
-
-      delegate: StdLine {
-        lineWidth: 300
-        anchors {
-          top: lines.top
-          topMargin: StyleManager.lineNoteHeight * index
-          left: lines.left
-        }
-      }
-    }
   }
 }

@@ -1,5 +1,36 @@
 import QtQuick 2.9
+import "Styles"
 
+Rectangle {
+  id: stdStaff
+  width: parent.width
+  height: childrenRect.height
+  color: "white"
+
+  Column {
+    id: lines
+    width: parent.width
+    spacing: StyleManager.noteHeight
+    anchors {
+      top: parent.top
+      left: parent.left
+    }
+
+    Repeater {
+      model: 5
+      Rectangle {
+        height: StyleManager.lineHeight
+        color: "black"
+        anchors {
+          left: lines.left
+          right: lines.right
+        }
+      }
+    }
+  }
+}
+
+/*
 Item {
   id: stdStaff
   width: childrenRect.width
@@ -91,63 +122,7 @@ Item {
            }
          }
        }
-/*
-       Rectangle {
-         id: dLine
-         height: internal.lineHeight
-         color: "black"
-         anchors {
-            left: parent.left
-            right: parent.right
-          }
-         Text {
-           id: dLabel
-           text: qsTr("D")
-         }
-        }
 
-       Rectangle {
-         id: bLine
-         height: internal.lineHeight
-         color: "black"
-         anchors {
-            left: parent.left
-            right: parent.right
-          }
-         Text {
-           id: bLabel
-           text: qsTr("B")
-         }
-        }
-
-       Rectangle {
-         id: gLine
-         height: internal.lineHeight
-         color: "black"
-         anchors {
-            left: parent.left
-            right: parent.right
-          }
-         Text {
-           id: gLabel
-           text: qsTr("G")
-         }
-        }
-
-       Rectangle {
-         id: eLine
-         height: internal.lineHeight
-         color: "black"
-         anchors {
-            left: parent.left
-            right: parent.right
-          }
-         Text {
-           id: eLabel
-           text: qsTr("E")
-         }
-        }
-*/
        // Ledger lines below
        Rectangle {
          id: cLowerLedgerLine
@@ -189,3 +164,4 @@ Item {
   // transitions
 
 }
+*/
