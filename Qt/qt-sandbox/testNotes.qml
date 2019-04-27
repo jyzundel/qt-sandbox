@@ -11,6 +11,7 @@ Rectangle {
                         "G", "F", "E", "D", "C", "B", "A", 
                         "G", "F", "E", "D", "C", "B", "A", 
                         "G", "F", "E", "D"]
+  property var beatBits: (0x1 << internal.noteCount) - 1
 
   QtObject {
     id: internal
@@ -45,24 +46,27 @@ Rectangle {
       property int noteIndex
 
       function getNoteIndex(mouseY) {
-        console.log("getNoteIndex mouseY: " + mouseY)
+        //console.log("getNoteIndex mouseY: " + mouseY)
         var canvasY = height - mouseY - StyleManager.noteHeight * 0.25
-        console.log("    canvasY: " + canvasY)
+        //console.log("    canvasY: " + canvasY)
         var index = Math.floor(canvasY / (StyleManager.lineNoteHeight * 0.5))
-        console.log("    index: " + index)
-        return Math.floor(canvasY / internal.noteCount  - StyleManager.noteHeight * 0.25)
+        //console.log("    index: " + index)
+        return index
       }
 
       function getIndexY() {
-        var index = noteIndex
+        var index = internal.noteCount - 1 - noteIndex
         if (index < 0) {
           index = 0
         } else if (index > internal.noteCount - 1) {
           index = internal.noteCount - 1
         }
-        index = internal.noteCount - index
         console.log("getIndexY: " + index)
-        return (internal.noteCount - index) * StyleManager.noteHeight * 0.5 - StyleManager.noteHeight * 0.25
+        var y = StyleManager.lineNoteHeight * (index >> 1)
+        if (index & 0x1) {
+          y += StyleManager.noteHeight * 0.5
+        }
+        return y
       }
 
       onEntered: {
@@ -79,6 +83,10 @@ Rectangle {
           preHighlight.y = getIndexY()
         }      
       }
+
+      onClicked: {
+        beatBits ^= 0x1 << noteIndex
+      }
     }
 
     StdStaff {
@@ -93,7 +101,7 @@ Rectangle {
 
     Rectangle {
       id: preHighlight
-      height: StyleManager.noteHeight / 2
+      height: StyleManager.lineNoteHeight
       y: 0
       color: "grey"
       anchors {
@@ -105,6 +113,7 @@ Rectangle {
     // Notes added a comment
     Beat {
       id: chord
+      notePattern: beatBits
       anchors{
         top: parent.top
         bottom: parent.bottom
