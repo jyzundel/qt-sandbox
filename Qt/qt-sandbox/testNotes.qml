@@ -45,12 +45,16 @@ Rectangle {
       property int noteIndex
 
       function getNoteIndex(mouseY) {
-        var canvasY = height - mouseY
-        return Math.floor((canvasY - StyleManager.noteHeight * 0.25) / internal.noteCount)
+        console.log("getNoteIndex mouseY: " + mouseY)
+        var canvasY = height - mouseY - StyleManager.noteHeight * 0.25
+        console.log("    canvasY: " + canvasY)
+        var index = Math.floor(canvasY / (StyleManager.lineNoteHeight * 0.5))
+        console.log("    index: " + index)
+        return Math.floor(canvasY / internal.noteCount  - StyleManager.noteHeight * 0.25)
       }
 
       function getIndexY() {
-        return noteIndex * internal.noteCount - StyleManager.noteHeight * 0.25
+        return (internal.noteCount - noteIndex) * StyleManager.noteHeight * 0.5 - StyleManager.noteHeight * 0.25
       }
 
       onEntered: {
@@ -69,22 +73,22 @@ Rectangle {
       }
     }
 
-    Rectangle {
-      id: preHighlight
-      height: StyleManager.noteHeight
-      y: 0
-      color: "grey"
-      anchors {
-        left: parent.left
-        right: parent.right
-      }
-    }
-
     StdStaff {
       id: staffLines
       anchors {
         top: parent.top
         topMargin: StyleManager.lineNoteHeight * 4
+        left: parent.left
+        right: parent.right
+      }
+    }
+
+    Rectangle {
+      id: preHighlight
+      height: StyleManager.noteHeight / 2
+      y: 0
+      color: "grey"
+      anchors {
         left: parent.left
         right: parent.right
       }
