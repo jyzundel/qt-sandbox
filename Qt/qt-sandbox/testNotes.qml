@@ -2,10 +2,15 @@ import QtQuick 2.9
 import "Styles"
 
 Rectangle {
-  id: test
+  id: root
   height: canvas.height + 20
   width: 600
   color: "cyan"
+
+  property var model: [      "F", "E", "D", "C", "B", "A", 
+                        "G", "F", "E", "D", "C", "B", "A", 
+                        "G", "F", "E", "D", "C", "B", "A", 
+                        "G", "F", "E", "D"]
 
   QtObject {
     id: internal
@@ -17,17 +22,62 @@ Rectangle {
     property string sharp: "\u266f"
 
     property var notes: [openNote, fillNote, flat, natural, sharp]
+    property int noteCount: model.length
+    property int lineCount: noteCount / 2
   }
 
   Rectangle {
     id: canvas
     color: "white"
-    height: StyleManager.lineNoteHeight * 12 + StyleManager.noteHeight * 0.5
+    height: StyleManager.lineNoteHeight * internal.lineCount + StyleManager.noteHeight * 0.5
     anchors {
       top: parent.top
       left: parent.left
       right: parent.right
       margins: 10
+    }
+
+    MouseArea {
+      id: canvasArea
+      anchors.fill: parent
+      hoverEnabled: true
+      
+      property int noteIndex
+
+      function getNoteIndex(mouseY) {
+        var canvasY = height - mouseY
+        return Math.floor((canvasY - StyleManager.noteHeight * 0.25) / internal.noteCount)
+      }
+
+      function getIndexY() {
+        return noteIndex * internal.noteCount - StyleManager.noteHeight * 0.25
+      }
+
+      onEntered: {
+        noteIndex = getNoteIndex(mouse.y)
+        preHighlight.y = getIndexY()
+        console.log("Entered index: " + noteIndex)
+      }
+
+      onPositionChanged: {
+        var index = getNoteIndex(mouse.y)
+        if (index != noteIndex) {
+          console.log("index changed: " + index)
+          noteIndex = index
+          preHighlight.y = getIndexY()
+        }      
+      }
+    }
+
+    Rectangle {
+      id: preHighlight
+      height: StyleManager.noteHeight
+      y: 0
+      color: "grey"
+      anchors {
+        left: parent.left
+        right: parent.right
+      }
     }
 
     StdStaff {
@@ -66,7 +116,7 @@ Rectangle {
         " lineNoteHeight: "  + StyleManager.lineNoteHeight)
       }*/
 
-      model: ["F", "E", "D", "C", "B", "A", "G", "F", "E", "D", "C", "B", "A", "G", "F", "E", "D", "C", "B", "A", "G", "F", "E", "D"]
+      model: root.model
       delegate: Rectangle {
         id: spaceRect
 
