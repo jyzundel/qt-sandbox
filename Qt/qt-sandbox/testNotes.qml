@@ -54,7 +54,15 @@ Rectangle {
       }
 
       function getIndexY() {
-        return (internal.noteCount - noteIndex) * StyleManager.noteHeight * 0.5 - StyleManager.noteHeight * 0.25
+        var index = noteIndex
+        if (index < 0) {
+          index = 0
+        } else if (index > internal.noteCount - 1) {
+          index = internal.noteCount - 1
+        }
+        index = internal.noteCount - index
+        console.log("getIndexY: " + index)
+        return (internal.noteCount - index) * StyleManager.noteHeight * 0.5 - StyleManager.noteHeight * 0.25
       }
 
       onEntered: {
