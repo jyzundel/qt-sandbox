@@ -122,6 +122,16 @@ Rectangle {
       }
     }
 
+    SharpsFlats {
+      accidentalBits: 0xfd // sharps: 0xfd  flats: 0x5f
+      anchors {
+        top: parent.top
+        left: parent.left
+        leftMargin: 12
+      }
+
+    }
+
     // Labels
     Repeater {
       id: spaceLabels
