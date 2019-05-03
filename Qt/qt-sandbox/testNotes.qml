@@ -125,7 +125,7 @@ Rectangle {
     // Labels
     Repeater {
       id: spaceLabels
-      width: 340
+      width: 500
       anchors {
         top: parent.top
         //topMargin: StyleManager.lineNoteHeight * 0.5

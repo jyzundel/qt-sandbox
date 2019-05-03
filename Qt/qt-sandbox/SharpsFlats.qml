@@ -67,7 +67,7 @@ Item {
       accidentalBits: root.accidentalBits
       bit: modelData.note - 'a'
 
-      visible: accidentalBits & (0x1 << bit)
+      //visible: accidentalBits & (0x1 << bit)
       width: StyleManager.noteHeight * 1.2
       height: width * (showSharps ? 1.0 : 2.0)
       color: "transparent"
