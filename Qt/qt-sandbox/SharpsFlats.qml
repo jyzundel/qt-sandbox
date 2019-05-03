@@ -1,10 +1,11 @@
-import QtQuick 2.0
+import QtQuick 2.9
 import "Styles"
 
 Item {
   id: root
 
   property int accidentalBits: 0xff
+  property bool editEnabled: false
   //property bool showSharps: accidentalBits & (0x1 << 7)
 
   anchors.topMargin: StyleManager.lineNoteHeight * (internal.isSharp ? 3 : 2.5) - StyleManager.noteHeight * 0.1
@@ -28,36 +29,7 @@ Item {
     property int sharpBit: 0x1 << 7
     property int isSharp: accidentalBits & sharpBit
   }
-/*
-  Rectangle {
-    id: sharpOrFlat
 
-    width: bitsType.width
-    height: bitsType.height
-    color: "white"
-    z: 2
-
-    anchors {
-      left: parent.left
-      right: parent.right
-      margins: 10
-    }
-
-    Text {
-      id: bitsType
-      font.pixelSize: 24
-      color: "black"
-      text: accidentalBits & internal.sharpBit ? internal.sharp : internal.flat
-    }
-
-    MouseArea {
-      anchors.fill: parent
-      onClicked: {
-        accidentalBits ^= internal.sharpBit
-      }
-    }
-  }
-*/
   Repeater {
     id: unnaturals
     model: internal.isSharp ? sharpsModel : flatsModel
@@ -66,10 +38,8 @@ Item {
 
       accidentalBits: root.accidentalBits
       bitIndex: modelData.note - 'a'
+      editEnabled: root.editEnabled
 
-      //visible: editEnabled || accidentalBits & (0x1 << bitIndex)
-      width: StyleManager.noteHeight * 1.2
-      height: width * (internal.isSharp ? 1.0 : 2.0)
       color: "transparent"
       border {
         width: 2
