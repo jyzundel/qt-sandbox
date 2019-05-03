@@ -5,9 +5,9 @@ Item {
   id: root
 
   property int accidentalBits: 0xff
-  property bool showSharps: accidentalBits & (0x1 << 7)
+  //property bool showSharps: accidentalBits & (0x1 << 7)
 
-  anchors.topMargin: StyleManager.lineNoteHeight * (showSharps ? 3 : 2.5) - StyleManager.noteHeight * 0.1
+  anchors.topMargin: StyleManager.lineNoteHeight * (internal.isSharp ? 3 : 2.5) - StyleManager.noteHeight * 0.1
 
   property var flatsModel: [
     { note: "f", x: 0, y: 0 }, { note: "e", x: 2, y: 0.5 }, { note: "d", x: 4, y: 1 }, { note: "c", x: 6, y: 1.5 },
@@ -28,7 +28,7 @@ Item {
     property int sharpBit: 0x1 << 7
     property int isSharp: accidentalBits & sharpBit
   }
-
+/*
   Rectangle {
     id: sharpOrFlat
 
@@ -57,30 +57,30 @@ Item {
       }
     }
   }
-
+*/
   Repeater {
     id: unnaturals
-    model: showSharps ? sharpsModel : flatsModel
+    model: internal.isSharp ? sharpsModel : flatsModel
     delegate: SharpFlat {
       id: accidentalRect
 
       accidentalBits: root.accidentalBits
-      bit: modelData.note - 'a'
+      bitIndex: modelData.note - 'a'
 
-      //visible: accidentalBits & (0x1 << bit)
+      //visible: editEnabled || accidentalBits & (0x1 << bitIndex)
       width: StyleManager.noteHeight * 1.2
-      height: width * (showSharps ? 1.0 : 2.0)
+      height: width * (internal.isSharp ? 1.0 : 2.0)
       color: "transparent"
       border {
         width: 2
-        color: showSharps ? "blue" : "green"
+        color: internal.isSharp ? "blue" : "green"
       }
       x: modelData.x * StyleManager.lineNoteHeight
       y: modelData.y * StyleManager.lineNoteHeight
 
       Component.onCompleted: {
         console.log("note: " + modelData.note + " xy: [" + modelData.x + ", " + modelData.y + "]")
-        console.log("    index: " + index + " bit: " + bit)
+        console.log("    index: " + index + " bit: " + bitIndex)
       }
     }
 

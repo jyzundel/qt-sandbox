@@ -175,12 +175,16 @@ Rectangle {
     }
 
     SharpsFlats {
-      accidentalBits: 0xfd // sharps: 0xfd  flats: 0x5f
+      // 0x1 0b1
+      // 0x2 0b10
+      // 0x3 0b11
+      // 0x4 0b100   0x5 0b101    0x6 0b110     0x7 0b111
+      // 0x8 0b1000  0x9 0b1001   0xa 0b1010    0xb 0b1011   0xc 0b1100   0xd 0b1101   0xf  0b1111
+      accidentalBits: 0b11111100 // sharps: 0xfd  flats: 0x5f
       anchors {
         top: parent.top
         left: parent.left
         leftMargin: 12
-        topMargin: 12
       }
     }
   }

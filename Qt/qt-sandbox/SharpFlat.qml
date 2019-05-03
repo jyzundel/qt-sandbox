@@ -4,7 +4,7 @@ Rectangle {
   id: sharpOrFlat
 
   property int accidentalBits: 0xff
-  property int bit: 0
+  property int bitIndex: 0
 
   QtObject {
     id: internal
@@ -13,7 +13,7 @@ Rectangle {
     property string sharp: "\u266f"
     property int sharpBit: 0x1 << 7
     property int isSharp: accidentalBits & sharpBit
-    property int maskBit: 0x1 << bit
+    property int maskBit: 0x1 << bitIndex
   }
 
   //width: bitsType.width
