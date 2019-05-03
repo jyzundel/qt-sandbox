@@ -70,13 +70,13 @@ Rectangle {
       }
 
       onEntered: {
-        noteIndex = getNoteIndex(mouse.y)
+        noteIndex = getNoteIndex(mouseY)
         preHighlight.y = getIndexY()
         console.log("Entered index: " + noteIndex)
       }
 
       onPositionChanged: {
-        var index = getNoteIndex(mouse.y)
+        var index = getNoteIndex(mouseY)
         if (index != noteIndex) {
           console.log("index changed: " + index)
           noteIndex = index
@@ -118,18 +118,8 @@ Rectangle {
         top: parent.top
         bottom: parent.bottom
         left: parent.left
-        leftMargin: 100
+        leftMargin: 300
       }
-    }
-
-    SharpsFlats {
-      accidentalBits: 0xfd // sharps: 0xfd  flats: 0x5f
-      anchors {
-        top: parent.top
-        left: parent.left
-        leftMargin: 12
-      }
-
     }
 
     // Labels
@@ -184,5 +174,14 @@ Rectangle {
       }
     }
 
+    SharpsFlats {
+      accidentalBits: 0xfd // sharps: 0xfd  flats: 0x5f
+      anchors {
+        top: parent.top
+        left: parent.left
+        leftMargin: 12
+        topMargin: 12
+      }
+    }
   }
 }
