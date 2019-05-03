@@ -8,6 +8,8 @@ Item {
   property bool editEnabled: false
   //property bool showSharps: accidentalBits & (0x1 << 7)
 
+  signal toggleBit(int maskBit)
+
   anchors.topMargin: StyleManager.lineNoteHeight * (internal.isSharp ? 3 : 2.5) - StyleManager.noteHeight * 0.1
 
   property var flatsModel: [
@@ -47,6 +49,10 @@ Item {
       }
       x: modelData.x * StyleManager.lineNoteHeight
       y: modelData.y * StyleManager.lineNoteHeight
+
+      onClickedSharpOrFlat: {
+        toggleBit(maskBit)
+      }
 
       Component.onCompleted: {
         console.log("note: " + modelData.note + " xy: [" + modelData.x + ", " + modelData.y + "]")

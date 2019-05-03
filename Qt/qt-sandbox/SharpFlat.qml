@@ -9,6 +9,7 @@ Rectangle {
   property bool editEnabled: false
 
   signal longPressed()
+  signal clickedSharpOrFlat(int maskBit)
 
   QtObject {
     id: internal
@@ -45,8 +46,7 @@ Rectangle {
   MouseArea {
     anchors.fill: parent
     onClicked: {
-      accidentalBits ^= internal.maskBit
-      console.log("sharp: " + internal.isSharp + " " + accidentalBits.toString(2))
+      clickedSharpOrFlat(internal.maskBit)
     }
     onPressAndHold: {
       longPressed()

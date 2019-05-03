@@ -181,8 +181,14 @@ Rectangle {
       accidentalBits: accidentals 
       bitIndex: 7
       editEnabled: editAccidentals
+      visible: true
 
       onLongPressed: editAccidentals = !editAccidentals
+
+      onClickedSharpOrFlat: {
+        accidentals ^= maskBit
+        console.log("accidentals: " + accidentals.toString(2) + " maskBit: " + maskBit)
+      }
 
       anchors {
         top: parent.top
@@ -204,6 +210,11 @@ Rectangle {
         top: parent.top
         left: parent.left
         leftMargin: 12
+      }
+
+      onToggleBit: {
+        accidentals ^= maskBit
+        console.log("accidentals: " + accidentals.toString(2) + " maskBit: " + maskBit)
       }
     }
   }
